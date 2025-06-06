@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "a4HVrO9/Kjm86LpuWc2SBVGprbYtMgg1C1ZBF59xwmI=",
+  "Source": "EventsApiLambda",
+  "BasePath": "_content/EventsApiLambda",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

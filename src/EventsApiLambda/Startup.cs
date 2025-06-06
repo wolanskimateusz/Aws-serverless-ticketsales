@@ -1,10 +1,16 @@
-﻿namespace EventsApiLambda;
+﻿using api.Data;
+using api.Interfaces;
+using api.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace EventsApiLambda;
 
 public class Startup
 {
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
+        Console.WriteLine("CS: " + Configuration.GetConnectionString("DefaultConnection"));
     }
 
     public IConfiguration Configuration { get; }
@@ -13,6 +19,19 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+
+        services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IArtistRepository, ArtistRepository>();
+        services.AddScoped<ITicketRepository, TicketRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+       
+
+
+        services.AddAuthorization();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
