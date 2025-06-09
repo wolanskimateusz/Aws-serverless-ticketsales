@@ -1,0 +1,47 @@
+/* Styl nagłówka dla dużych ekranów */
+header {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Poprawienie marginesów i szerokości dla dużych ekranów */
+  .navbar-nav {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Styl dla rozwijanego menu na dużych ekranach */
+  #navbarNav {
+    width: 100%;
+  }
+  
+  /* Zwiększenie rozmiaru tekstu i paddingu w linkach */
+  .nav-link {
+    font-size: 16px;  /* Zwiększenie rozmiaru tekstu */
+    padding: 10px 15px;  /* Zwiększenie paddingu */
+  }
+  
+  /* Zwiększenie wysokości przycisków menu */
+  .navbar-toggler {
+    padding: 10px;
+    margin-left: auto;
+    border-color: white;  /* Biały kolor ramki przycisku */
+  }
+  
+  /* Zmiana koloru przycisku hamburgera na biały */
+  .navbar-toggler-icon {
+    background-color: white;  /* Biały kolor tła ikony hamburgera */
+  }
+  
+  /* Zwiększenie rozmiaru tekstu w rozwijanej liście na małych ekranach */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      font-size: 14px;  /* Zwiększenie rozmiaru czcionki w rozwijanym menu */
+    }
+  }
+  
+  /* Poprawienie z-index w rozwijanym menu */
+  #navbarNav {
+    z-index: 9999;  /* Ustawienie wyższego z-index, aby lista była nad innymi elementami */
+  }
+  

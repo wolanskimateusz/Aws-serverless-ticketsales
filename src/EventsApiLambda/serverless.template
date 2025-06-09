@@ -3,6 +3,16 @@
   "Transform": "AWS::Serverless-2016-10-31",
   "Description": "An AWS Serverless Application that uses the ASP.NET Core framework running in Amazon Lambda.",
   "Resources": {
+    "HttpApi": {
+      "Type": "AWS::Serverless::HttpApi",
+      "Properties": {
+        "CorsConfiguration": {
+          "AllowOrigins": [ "http://localhost:5173" ],
+          "AllowMethods": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+          "AllowHeaders": [ "Content-Type", "Authorization" ]
+        }
+      }
+    },
     "AspNetCoreFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
@@ -16,6 +26,7 @@
           "ProxyApi": {
             "Type": "HttpApi",
             "Properties": {
+              "ApiId": { "Ref": "HttpApi" },
               "Path": "/{proxy+}",
               "Method": "ANY"
             }
@@ -28,7 +39,7 @@
     "ApiURL": {
       "Description": "HTTP API endpoint URL",
       "Value": {
-        "Fn::Sub": "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
+        "Fn::Sub": "https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com"
       }
     }
   }

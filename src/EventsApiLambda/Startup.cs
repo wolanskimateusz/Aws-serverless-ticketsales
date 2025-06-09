@@ -20,6 +20,17 @@ public class Startup
     {
         services.AddControllers();
 
+        services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:5173")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+    });
+
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IArtistRepository, ArtistRepository>();
         services.AddScoped<ITicketRepository, TicketRepository>();
@@ -50,6 +61,8 @@ public class Startup
 
         app.UseHttpsRedirection();
 
+        app.UseCors("AllowLocalhost");
+        
         app.UseRouting();
 
         app.UseAuthorization();
