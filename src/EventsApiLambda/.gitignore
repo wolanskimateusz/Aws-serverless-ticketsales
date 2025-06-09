@@ -1,0 +1,44 @@
+# Dotnet build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / VS Code / VS
+.idea/
+.vscode/
+*.code-workspace
+
+# Lambda publish artifacts
+.publish/
+aws-lambda-tools-defaults.json
+
+# AWS credential/cache files (optional - nie z repo!)
+.aws/
+*.aws/
+
+# Environment & secrets
+.env
+*.secret
+secrets.json
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results
+TestResults/
+
+# NuGet packages
+*.nupkg
+packages/
+.nuget/
+
+# Others
+*.db
+*.sqlite

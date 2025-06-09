@@ -10,7 +10,7 @@ public class Startup
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
-        Console.WriteLine("CS: " + Configuration.GetConnectionString("DefaultConnection"));
+        DotNetEnv.Env.Load();
     }
 
     public IConfiguration Configuration { get; }
@@ -25,10 +25,16 @@ public class Startup
         services.AddScoped<ITicketRepository, TicketRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        var host = Environment.GetEnvironmentVariable("DB_HOST");
+        var db = Environment.GetEnvironmentVariable("DB_NAME");
+        var user = Environment.GetEnvironmentVariable("DB_USER");
+        var pass = Environment.GetEnvironmentVariable("DB_PASS");
 
-       
+        var connectionString = $"Server={host};Database={db};User Id={user};Password={pass};TrustServerCertificate=True;";
+        Console.WriteLine("CS: " + connectionString);
+
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(connectionString));
 
 
         services.AddAuthorization();

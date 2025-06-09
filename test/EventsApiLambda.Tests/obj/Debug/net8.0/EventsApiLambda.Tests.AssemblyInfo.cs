@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EventsApiLambda.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5371f5e1e08728bd3f4768ffd626ac3247340bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8034bc580b91ed4dabc0e63aba8f68f4079224cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("EventsApiLambda.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EventsApiLambda.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

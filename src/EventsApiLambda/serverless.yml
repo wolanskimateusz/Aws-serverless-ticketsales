@@ -1,0 +1,51 @@
+service: events-api
+
+provider:
+  name: aws
+  runtime: dotnet8
+  region: eu-central-1
+
+functions:
+  eventsApi:
+    handler: EventsApiLambda::EventsApiLambda.LambdaEntryPoint::FunctionHandlerAsync
+    events:
+      - http:
+          path: api/event
+          method: get
+          cors: true
+      - http:
+          path: api/event/{id}
+          method: get
+          cors: true
+      - http:
+          path: api/event
+          method: post
+          cors: true
+      - http:
+          path: api/event/{id}
+          method: put
+          cors: true
+      - http:
+          path: api/event/{id}
+          method: delete
+          cors: true
+      - http:
+          path: api/event/latest
+          method: get
+          cors: true
+      - http:
+          path: api/event/artist
+          method: put
+          cors: true
+      - http:
+          path: api/event/artistnew
+          method: put
+          cors: true
+      - http:
+          path: api/event/artist
+          method: delete
+          cors: true
+      - http:
+          path: api/event/eventList
+          method: get
+          cors: true

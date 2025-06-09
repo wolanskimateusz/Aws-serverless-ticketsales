@@ -166,3 +166,7 @@ D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\obj\Debug\net8
 D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\obj\Debug\net8.0\EventsApiLambda.pdb
 D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\obj\Debug\net8.0\EventsApiLambda.genruntimeconfig.cache
 D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\obj\Debug\net8.0\ref\EventsApiLambda.dll
+D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\bin\Debug\net8.0\.env
+D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\bin\Debug\net8.0\DotNetEnv.dll
+D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\bin\Debug\net8.0\Sprache.dll
+D:\dotnet\AWS\EventsApiLambda\EventsApiLambda\src\EventsApiLambda\obj\Debug\net8.0\EventsApiLambda.sourcelink.json
