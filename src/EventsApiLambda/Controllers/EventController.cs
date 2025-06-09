@@ -83,10 +83,19 @@ namespace api.Controllers
         [HttpGet("latest")]
         public async Task<IActionResult> GetLatest()
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _eventRepo.GetLatestAsync();
-            if (result == null) return NotFound();
-            return Ok(result);
+           try
+    {
+        var result = await _eventRepo.GetLatestAsync();
+        if (result == null || !result.Any()) return NotFound();
+
+        var dtoList = result.Select(x => x.ToEventDto()).ToList();
+        return Ok(dtoList);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"[ERROR] GetLatest: {ex.Message}");
+        return StatusCode(500, "Internal Server Error");
+    }
         }
 
         [HttpPut("artist")]

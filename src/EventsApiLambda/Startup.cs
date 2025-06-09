@@ -1,7 +1,14 @@
 ﻿using api.Data;
 using api.Interfaces;
+using api.Models;
 using api.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using api.Serviceces;
+
 
 namespace EventsApiLambda;
 
@@ -31,10 +38,50 @@ public class Startup
             });
     });
 
+        services.AddControllers().AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });
+        
+        services.AddIdentity<AppUser, IdentityRole>(options =>
+    {
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 1;
+        options.Password.RequiredUniqueChars = 0;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
+
+        services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = Configuration["JWT:Issuer"],
+            ValidateAudience = true,
+            ValidAudience = Configuration["JWT:Audience"],
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(Configuration["JWT:SigningKey"]))
+        };
+    });
+
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IArtistRepository, ArtistRepository>();
         services.AddScoped<ITicketRepository, TicketRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddScoped<ITokenService, TokenService>();
+
 
         var host = Environment.GetEnvironmentVariable("DB_HOST");
         var db = Environment.GetEnvironmentVariable("DB_NAME");
@@ -62,8 +109,10 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseCors("AllowLocalhost");
-        
+
         app.UseRouting();
+        
+        app.UseAuthentication();
 
         app.UseAuthorization();
 
